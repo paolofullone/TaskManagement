@@ -7,21 +7,21 @@ namespace WebApi.Infrastructure.GraphQL;
 public class Query
 {
     // Basic queries
-    [UsePaging]
+    [UsePaging(DefaultPageSize = 50, MaxPageSize = 100)] // Magic Numbers just to demonstrate paging parameters.
     [UseProjection]
     [UseFiltering]
     [UseSorting]
     public IQueryable<User> GetUsers([Service] ApplicationDbContext context)
         => context.Users;
 
-    [UsePaging]
+    [UsePaging(DefaultPageSize = 50, MaxPageSize = 100)]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
     public IQueryable<Project> GetProjects([Service] ApplicationDbContext context)
         => context.Projects;
 
-    [UsePaging]
+    [UsePaging(DefaultPageSize = 50, MaxPageSize = 100)]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
