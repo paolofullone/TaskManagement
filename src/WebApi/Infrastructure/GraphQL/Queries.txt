@@ -1,0 +1,88 @@
+# Get Projects Names
+query{
+  projects{
+    nodes{
+      name
+    }
+  }
+}
+
+# Get paginated users with their tasks
+query {
+  users {
+    nodes {
+      name
+      tasks {
+        title
+      }
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+}
+
+# Get all projects with their tasks
+query {
+  projects {
+    nodes {
+      name
+      tasks {
+        title
+      }
+    }
+  }
+}
+
+# Get user by ID with their tasks and projects
+query {
+  userById(id: 1) {
+    name
+    tasks {
+      title
+      project {
+        name
+      }
+    }
+  }
+}
+
+# Get completed tasks with user and project info
+query {
+  completedTasks(isCompleted: true) {
+    nodes {
+      title
+      user {
+        name
+      }
+    }
+  }
+}
+
+# Get tasks for a specific user
+query {
+  tasksByUser(userId: 2) {
+    nodes {
+      title
+      isCompleted
+    }
+  }
+}
+
+# Get finished tasks for a specific user
+query {
+  filteredTasksByUser(userId: 1, isCompleted: true) {
+    nodes {
+      id
+      title
+      isCompleted
+      project {
+        name
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}

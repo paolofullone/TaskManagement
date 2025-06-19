@@ -1,0 +1,22 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: 'Password123!'
+      ACCEPT_EULA: 'Y'
+      MSSQL_PID: 'Developer'
+    ports:
+      - '1433:1433'
+    cap_drop:
+      - NET_RAW
+    restart: always
+
+  mssqltools:
+    image: mcr.microsoft.com/mssql-tools
+    container_name: 'mssqltools'
+    depends_on:
+      - sqlserver
+    volumes:
+      - ./src/WebApi/Infrastructure/Data/:/tmp/
+    command: /bin/bash -c "ls /tmp/ && sleep 30 && chmod +x /tmp/database.sh && /tmp/database.sh"
